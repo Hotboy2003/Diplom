@@ -13,3 +13,5 @@ Router::get('/admin/login/', [new App\Controller\AuthController(), 'authUser']);
 Router::post('/admin/login/check/', [new App\Controller\AuthController(), 'checkUser']);
 
 Router::get('/edit/:objectName/', [new App\Controller\AdminController(), 'editObject']);
+
+Router::post('/edit/update/:objectName/', [new App\Controller\UpdateController(), 'updateEditObject']);

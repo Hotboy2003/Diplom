@@ -27,4 +27,25 @@ class AdminRepo
 		}
 		return $data;
 	}
+
+	public static function getCurrentObject(string $tableName, int $objectId): array
+	{
+		$primaryKeys = [
+			'suppliers' => 'supplier_id',
+			'contacts' => 'contact_id',
+			'status_types' => 'status_id',
+			'migration' => 'id',
+			'supply_types' => 'type_id'
+		];
+
+		$DBOperator = DBHandler::getInstance();
+		$result = $DBOperator->query("SELECT * FROM $tableName
+WHERE $primaryKeys[$tableName] = $objectId;");
+
+		$data = [];
+		while ($row = mysqli_fetch_assoc($result)) {
+			$data[] = $row;
+		}
+		return $data;
+	}
 }

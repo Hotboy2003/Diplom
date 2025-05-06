@@ -22,7 +22,16 @@ class AdminController extends BaseController
 			$data[$tableName] = AdminRepo::getTableData($tableName);
 		}
 
-		echo self::render('layout.php', ['content' => self::render('MainPage/admin.php', ['data' => $data]),]);
+		$excludedTables = [
+			'migration',
+			'supplier_contacts',
+			'supplier_supply_types'
+		];
+
+		// Фильтрация основного массива
+		$filteredData = array_diff_key($data, array_flip($excludedTables));
+
+		echo self::render('layout.php', ['content' => self::render('MainPage/admin.php', ['data' => $filteredData]),]);
 	}
 
 	public function editObject($objectName): void
@@ -32,9 +41,10 @@ class AdminController extends BaseController
 			header('Location: /admin/login/');
 		}
 
-		var_dump($objectName);
-		var_dump($_GET['id']);
+		$data = AdminRepo::getCurrentObject($objectName[0], $_GET['id']);
 
-		//echo self::render('layout.php', ['content' => self::render('MainPage/admin.php', ['data' => $data]),]);
+		echo self::render('layout.php', ['content' => self::render('MainPage/admin_edit.php', ['data' => $data[0],
+			'tableName' => $objectName[0]])
+			,]);
 	}
 }
