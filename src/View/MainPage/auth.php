@@ -48,7 +48,6 @@
 
 	<div class="card-body p-4 p-lg-5">
 		<form method="post" action="/admin/login/check/">
-			<!-- Логин -->
 			<div class="mb-4">
 				<div class="input-group">
                   <span class="input-group-text">
@@ -62,7 +61,6 @@
 				</div>
 			</div>
 
-			<!-- Пароль -->
 			<div class="mb-4">
 				<div class="input-group">
                   <span class="input-group-text">
@@ -76,7 +74,6 @@
 				</div>
 			</div>
 
-			<!-- Кнопка входа -->
 			<button type="submit"
 					class="btn btn-primary btn-lg w-100 py-3">
 				<i class="bi bi-box-arrow-in-right me-2"></i>

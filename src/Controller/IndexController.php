@@ -6,7 +6,6 @@ use Core\Database\Repo\SupplierRepo;
 use Core\Database\Repo\ContactRepo;
 use Core\Database\Repo\TypeRepo;
 
-
 class IndexController extends BaseController
 {
 	public function showIndexPage($type): void
@@ -44,6 +43,5 @@ class IndexController extends BaseController
 		echo self::render('layout.php', ['content' => self::render('MainPage/index.php', ['data' => $result, 'types'
 		=> $typesList, 'filterType' => $type, 'dopTitle' => $dopTitle])
 			,]);
-
 	}
 }

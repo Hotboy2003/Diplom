@@ -1,14 +1,8 @@
 <?php
 /**
  * @var array $data // Ассоциативный массив таблиц
+ * @var array $primaryKeys
  */
-$primaryKeys = [
-	'suppliers' => 'supplier_id',
-	'contacts' => 'contact_id',
-	'status_types' => 'status_id',
-	'migration' => 'id',
-	'supply_types' => 'type_id'
-];
 ?>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -53,6 +47,7 @@ $primaryKeys = [
 		</div>
 
 		<div class="card-body p-3">
+			<div class="d-flex justify-content-between mb-4">
 			<ul class="nav nav-tabs mb-4" id="databaseTabs">
 				<?php foreach ($data as $tableName => $tableData): ?>
 					<li class="nav-item">
@@ -62,9 +57,7 @@ $primaryKeys = [
 							<?= match($tableName) {
 								'contacts' => '📞 Контакты',
 								'suppliers' => '🏢 Поставщики',
-								'migration' => '📁 Миграции',
 								'status_types' => '🏷️ Статусы',
-								'supplier_contacts' => '🤝 Связи',
 								'supply_types' => '📦 Типы поставок',
 								default => $tableName
 							} ?>
@@ -72,6 +65,13 @@ $primaryKeys = [
 					</li>
 				<?php endforeach; ?>
 			</ul>
+				<button
+						class="btn btn-success btn-sm align-self-center"
+						id="addRowButton"
+						data-current-table="suppliers">
+						<i class="bi bi-plus-lg"></i> Добавить запись
+					</button>
+			</div>
 
 			<div class="tab-content">
 				<?php foreach ($data as $tableName => $tableData): ?>
@@ -114,9 +114,12 @@ $primaryKeys = [
 														<i class="bi bi-pencil"></i>
 													</button>
 												</form>
-												<button class="btn btn-sm btn-outline-danger ms-2 delete-btn">
-													<i class="bi bi-trash"></i>
-												</button>
+												<form action="/delete/<?= $tableName ?>/" method="get">
+													<input type="hidden" name="id" value="<?=$row[$primaryKeys[$tableName]]?>">
+													<button class="btn btn-sm btn-outline-danger ms-2 delete-btn">
+														<i class="bi bi-trash"></i>
+													</button>
+												</form>
 											</td>
 										</tr>
 									<?php endforeach; ?>
@@ -141,4 +144,24 @@ $primaryKeys = [
 			table.parentElement.style.overflowX = 'auto';
 		});
 	});
+
+	document.addEventListener('DOMContentLoaded', function() {
+		const addButton = document.getElementById('addRowButton');
+		const tabs = document.querySelectorAll('[data-bs-toggle="tab"]');
+
+		// Обновляем текущую таблицу при переключении вкладок
+		tabs.forEach(tab => {
+			tab.addEventListener('shown.bs.tab', e => {
+				const targetTable = e.target.getAttribute('data-bs-target').replace('#', '');
+				addButton.setAttribute('data-current-table', targetTable);
+			});
+		});
+
+		// Обработчик клика по кнопке
+		addButton.addEventListener('click', function() {
+			const tableName = this.getAttribute('data-current-table');
+			window.location.href = `/add/${encodeURIComponent(tableName)}/`;
+		});
+	});
+
 </script>

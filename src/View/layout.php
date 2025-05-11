@@ -21,7 +21,6 @@
 
 <header class="container-fluid border-bottom">
 	<div class="row align-items-center py-3 px-md-5 g-4">
-		<!-- Логотип -->
 		<div class="col-md-auto">
 			<a href="/" class="d-flex align-items-center text-decoration-none">
 				<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#0d6efd" class="bi bi-truck" viewBox="0 0 16 16">
@@ -31,7 +30,6 @@
 			</a>
 		</div>
 
-		<!-- Поисковая строка -->
 		<div class="col-md-6 col-lg-5">
 			<form action="/" method="GET">
 				<div class="input-group shadow-sm">
@@ -50,7 +48,6 @@
 			</form>
 		</div>
 
-		<!-- Инфоблок -->
 		<div class="col-md-auto ms-auto">
 			<div class="d-flex align-items-center gap-3">
 				<span class="badge bg-success">v2.1</span>

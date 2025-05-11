@@ -121,7 +121,6 @@
 
 					<tbody>
 					<?php foreach ($data as $supplier): ?>
-						<!-- Основная строка -->
 						<tr data-bs-toggle="collapse"
 							data-bs-target="#details-<?= $supplier['supplier']->getId() ?>"
 							class="align-middle">
@@ -161,11 +160,9 @@
 							</td>
 						</tr>
 
-						<!-- Содержимое деталей -->
 						<tr class="collapse details-content" id="details-<?= $supplier['supplier']->getId() ?>">
 							<td colspan="5" class="p-3">
 								<div class="row g-3">
-									<!-- Основные данные -->
 									<div class="col-12 col-lg-4">
 										<div class="info-card basic-card p-3 bg-white shadow-sm">
 											<div class="d-flex align-items-center mb-3">
@@ -182,7 +179,6 @@
 										</div>
 									</div>
 
-									<!-- Контакты -->
 									<div class="col-12 col-lg-4">
 										<div class="info-card contacts-card p-3 bg-white shadow-sm">
 											<div class="d-flex align-items-center mb-3">
@@ -213,7 +209,6 @@
 										</div>
 									</div>
 
-									<!-- Заметки -->
 									<div class="col-12 col-lg-4">
 										<div class="info-card notes-card p-3 bg-white shadow-sm">
 											<div class="d-flex align-items-center mb-3">
